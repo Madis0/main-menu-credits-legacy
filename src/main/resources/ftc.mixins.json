@@ -3,12 +3,11 @@
   "package": "in.roflmuff.ftc.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
-    "MinecraftClientMixin"
+    "MixinTitleScreen"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
-    "MixinTitleScreen"
   ]
 }
