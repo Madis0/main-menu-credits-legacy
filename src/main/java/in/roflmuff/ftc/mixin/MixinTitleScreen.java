@@ -23,6 +23,7 @@ public abstract class MixinTitleScreen extends Screen {
     @Shadow private long backgroundFadeStart;
     private Text menuText;
     private int menuTextWidth;
+    private int textPosition;
     private int yOffset;
 
     protected MixinTitleScreen(Text title) {
@@ -33,6 +34,9 @@ public abstract class MixinTitleScreen extends Screen {
         yOffset = 20;
         menuText = Text.of(FabricTitleChangerConfig.text);
         this.menuTextWidth = this.textRenderer.getWidth(menuText);
+        assert client != null;
+        int windowWidth = client.getWindow().getScaledWidth();
+        textPosition = windowWidth - this.menuTextWidth - 2;
     }
 
     @Inject(at = @At("TAIL"), method = "render")
@@ -40,9 +44,9 @@ public abstract class MixinTitleScreen extends Screen {
         float f = this.doBackgroundFade ? (float) (Util.getMeasuringTimeMs() - this.backgroundFadeStart) / 1000.0F : 1.0F;
         float g = this.doBackgroundFade ? MathHelper.clamp(f - 1.0F, 0.0F, 1.0F) : 1.0F;
         int l = MathHelper.ceil(g * 255.0F) << 24;
-        textRenderer.drawWithShadow(matrices, menuText,2,this.height - yOffset, 16777215 | l);
-        if (mouseX > 2 && mouseX < 2 + this.menuTextWidth && mouseY > this.height - yOffset && mouseY < this.height - yOffset + 10) {
-            fill(matrices, 2, this.height - yOffset + 9, 2 + this.menuTextWidth, this.height - yOffset + 10, 16777215 | l);
+        textRenderer.drawWithShadow(matrices, menuText, textPosition,this.height - yOffset, 16777215 | l);
+        if (mouseX > textPosition && mouseX < textPosition + this.menuTextWidth && mouseY > this.height - yOffset && mouseY < this.height - yOffset + 10) {
+            fill(matrices, textPosition, this.height - yOffset + 9, textPosition + this.menuTextWidth, this.height - yOffset + 10, 16777215 | l);
         }
     }
 
@@ -55,7 +59,7 @@ public abstract class MixinTitleScreen extends Screen {
 
     @Inject(at = @At("HEAD"), method = "mouseClicked",cancellable = true)
     private void puzzle$mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
-        if (mouseX > 2 && mouseX < (double)(2 + this.menuTextWidth) && mouseY > (double)(this.height - yOffset) && mouseY < (double)this.height - yOffset + 10) {
+        if (mouseX > textPosition && mouseX < (double)(textPosition + this.menuTextWidth) && mouseY > (double)(this.height - yOffset) && mouseY < (double)this.height - yOffset + 10) {
             if (Objects.requireNonNull(this.client).options.chatLinksPrompt) {
                 this.client.setScreen(new ConfirmChatLinkScreen(this::confirmLink, FabricTitleChangerConfig.url, true));
             } else {
