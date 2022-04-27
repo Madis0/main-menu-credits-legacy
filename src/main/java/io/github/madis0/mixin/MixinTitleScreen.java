@@ -1,9 +1,9 @@
-package in.roflmuff.ftc.mixin;
+package io.github.madis0.mixin;
 
 import net.minecraft.client.gui.screen.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import in.roflmuff.ftc.config.FabricTitleChangerConfig;
+import io.github.madis0.config.MainMenuCreditsConfig;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
@@ -32,7 +32,7 @@ public abstract class MixinTitleScreen extends Screen {
     @Inject(at = @At("TAIL"), method = "init")
     private void puzzle$init(CallbackInfo ci) {
         yOffset = 20;
-        menuText = Text.of(FabricTitleChangerConfig.text);
+        menuText = Text.of(MainMenuCreditsConfig.text);
         this.menuTextWidth = this.textRenderer.getWidth(menuText);
         assert client != null;
         int windowWidth = client.getWindow().getScaledWidth();
@@ -52,7 +52,7 @@ public abstract class MixinTitleScreen extends Screen {
 
     private void confirmLink(boolean open) {
         if (open) {
-            Util.getOperatingSystem().open(FabricTitleChangerConfig.url);
+            Util.getOperatingSystem().open(MainMenuCreditsConfig.url);
         }
         Objects.requireNonNull(this.client).setScreen(this);
     }
@@ -61,9 +61,9 @@ public abstract class MixinTitleScreen extends Screen {
     private void puzzle$mouseClicked(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
         if (mouseX > textPosition && mouseX < (double)(textPosition + this.menuTextWidth) && mouseY > (double)(this.height - yOffset) && mouseY < (double)this.height - yOffset + 10) {
             if (Objects.requireNonNull(this.client).options.chatLinksPrompt) {
-                this.client.setScreen(new ConfirmChatLinkScreen(this::confirmLink, FabricTitleChangerConfig.url, true));
+                this.client.setScreen(new ConfirmChatLinkScreen(this::confirmLink, MainMenuCreditsConfig.url, true));
             } else {
-                Util.getOperatingSystem().open(FabricTitleChangerConfig.url);
+                Util.getOperatingSystem().open(MainMenuCreditsConfig.url);
             }
             cir.setReturnValue(false);
         }

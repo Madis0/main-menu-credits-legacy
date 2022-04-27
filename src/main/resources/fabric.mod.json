@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "ftc",
+  "id": "main-menu-credits",
   "version": "${version}",
 
-  "name": "Fabric Title Changer",
-  "description": "A simple mod to configure the Minecraft window title.",
+  "name": "Main Menu Credits",
+  "description": "A Fabric mod that allows modpacks to add their name in main menu's bottom right corner.",
   "authors": [
-    "Roflmuffin"
+    "Madis0"
   ],
   "contact": {
-    "homepage": "https://github.com/Roflmuffin",
-    "sources": "https://github.com/Roflmuffin/fabric-title-changer"
+    "homepage": "https://example.com/curseforge-page-here",
+    "sources": "https://github.com/Fabulously-Optimized/main-menu-credits"
   },
 
   "license": "MIT",
-  "icon": "assets/ftc/icon.png",
+  "icon": "assets/main-menu-credits/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "in.roflmuff.ftc.FabricTitleChanger"
+      "io.github.madis0.MainMenuCredits"
     ]
   },
   "mixins": [
-    "ftc.mixins.json"
+    "main-menu-credits.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13.3",
+    "fabricloader": ">=0.14.3",
     "fabric": "*",
     "minecraft": "*",
     "java": ">=17"

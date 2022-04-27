@@ -1,6 +1,6 @@
 {
   "required": true,
-  "package": "in.roflmuff.ftc.mixin",
+  "package": "io.github.madis0.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
     "MixinTitleScreen"

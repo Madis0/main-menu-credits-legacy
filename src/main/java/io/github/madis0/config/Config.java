@@ -1,4 +1,4 @@
-package in.roflmuff.ftc.config;
+package io.github.madis0.config;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
