@@ -5,5 +5,5 @@ public class MainMenuCreditsConfig {
     public static String text = "§cMissing modpack config";
 
     @Config(config="settings", category = "windowTitle", key = "url", comment = "Link that is opened on click")
-    public static String url = "https://example.com/help-wiki-here";
+    public static String url = "https://github.com/Fabulously-Optimized/main-menu-credits/wiki/Missing-modpack-config";
 }
